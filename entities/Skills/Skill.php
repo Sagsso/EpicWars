@@ -1,6 +1,5 @@
 <?php
 
-namespace entities\Skills;
 
 class Skill {
     private $name;

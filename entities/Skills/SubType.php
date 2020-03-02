@@ -1,6 +1,5 @@
 <?php
 
-namespace entities\Skills;
 
 class SubType {
     

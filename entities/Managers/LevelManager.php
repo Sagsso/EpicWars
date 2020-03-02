@@ -1,6 +1,6 @@
 <?php
 
-namespace entities\Managers;
+// namespace entities\Managers;
 
 class LevelManager {
     private static $baseExp = 100;

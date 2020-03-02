@@ -1,22 +1,21 @@
 <?php
 spl_autoload_register(function($class){
-    
-     /*
-     *  Namespaced Classes
-     */
-    if(file_exists(__DIR__."/".str_replace('\\','/',$class).".php")){
-        require_once __DIR__."/".str_replace('\\','/',$class).".php";
-        return 0;
+    if(file_exists("entities/".$class.".php")){
+        include "entities/".$class.".php";
     }
-    
-    if(file_exists(INTERFACES.$class.".php")){
-        require_once INTERFACES.$class.".php";
-        return 0;
+    if(file_exists("interfaces/".$class.".php")){
+        include "interfaces/".$class.".php";
     }
 
-    if(file_exists(ENTITIES.$class.".php")){
-        require_once ENTITIES.$class.".php";
-        return 0;
+    if(file_exists("entities/Managers/".$class.".php")){
+        include "entities/Managers/".$class.".php";
     }
 
-});
+    if(file_exists("entities/Races/".$class.".php")){
+        include "entities/Races/".$class.".php";
+    }
+
+    if(file_exists("entities/Skills/".$class.".php")){
+        include "entities/Skills/".$class.".php";
+    }
+ });

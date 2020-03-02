@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-namespace entities;
+// namespace entities;
 
 /**
  * Description of GameAnnouncer
@@ -15,7 +15,7 @@ namespace entities;
  */
 class GameAnnouncer {
     
-    public static function presentCharacter(\entities\Character $character){ 
+    public static function presentCharacter(Character $character){ 
         echo $character->getName()." se ha unido al mundo</br>";
         echo $character->getName()." es un ".$character->getRace()::getRaceName()."</br>";
         echo "Las estadísticas de ".$character->getName()." son:</br>";

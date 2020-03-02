@@ -6,16 +6,17 @@
  * and open the template in the editor.
  */
 
-namespace entities\Races;
+// namespace entities\Races;
 
 /**
  * Description of Race
  *
  * @author pabhoz
  */
-abstract class Race implements \interfaces\HumanoidI{
+abstract class Race implements HumanoidI{
     
     public static function getRaceName() {
+        echo "<br> Raza: ";
         $nameArray = explode('\\',get_called_class());
         return $nameArray[sizeof($nameArray) - 1];
     }

@@ -26,5 +26,14 @@ class CharacterManager{
         return  $character;
     }
 
+    public static function getStatsArray(Character $character) {
+        return array(
+            "intl" => $character->getIntl(),
+            "agi" => $character->getAgi(),
+            "str" => $character->getStr(),
+            "hp" => $character->getHealtPoints()
+        );
+    }
+
 
 }

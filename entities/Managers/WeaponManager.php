@@ -20,8 +20,8 @@ class WeaponManager {
 
         foreach ($weaponsSupport[strval($weapon->getHands())] as $supportClass ) {
             if($clase == $supportClass) {
-                $character->setWeapons($weapon);
-                echo "El arma ".$weapon->getName()." ha sido asignada al jugador ".$character->getName()."<br>";
+                echo $character->setWeapons($weapon);
+                // echo "El arma ".$weapon->getName()." ha sido asignada al jugador ".$character->getName()."<br>";
                 return 0;
             }
         }

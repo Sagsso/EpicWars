@@ -18,7 +18,7 @@ class Character {
     private $race;
     private $playableClass;
     private $skills=[];
-    private $weapons=[];
+    private $weapons=["r" => null, "l" => null];
 
     public function __construct( $name, $sex, $bodyType, $race, $playableClass, $str, $intl ,$agi ,$pDef ,$mDef ,$xp, $healtPoints,$maxHealtPoints, $level){
         $this->name = $name;
@@ -323,16 +323,28 @@ class Character {
     }
 
     /**
-     * Set the value of weapons
+     * Set the value of weapons & return info.
      *
      * @return  self
      */ 
-    public function setWeapons($weapons)
+    public function setWeapons($weapon)
     {
-        if(sizeof($this->weapons)<2) {
-            array_push($this->weapons, $weapons);
+        if($weapon->getHands()==1) {
+            if ($this->weapons['r'] == null) {
+                $this->weapons['r'] = $weapon;       
+                return "El arma " . $weapon->getName() . " ha sido asignada al jugador " . $this->name . " en la mano derecha.<br>";
+    
+            } elseif ($this->weapons['l'] == null){
+                $this->weapons['l'] = $weapon;
+                return "El arma " . $weapon->getName() . " ha sido asignada al jugador " . $this->name . " en la mano izquierda.<br>";
+    
+            } else {
+                return "El jugador no puede tener más de dos armas.<br>";
+            }
         } else {
-            echo "El jugador no puede tener más de dos armas.";
+            $this->weapons = [$weapon];
+            return "El arma de dos manos " . $weapon->getName() . " ha sido asignada al jugador " . $this->name . ".<br>";
+
         }
 
         return $this;

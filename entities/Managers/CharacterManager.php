@@ -4,13 +4,12 @@
 
 
 class CharacterManager{
-
+    
     public static function create($name, $sex, $bodyType, $race, $playableClass){
         
-        $classes = ['Mago', 'Pícaro', 'Guerrero'];
+        $classes = ['mago', 'picaro', 'guerrero'];
         $bodyTypes = ['Atlético', 'Delgado', 'Llenito de amor'];
         $sexos = ['Femenino', 'Masculino', 'Otro'];
-
 
         [$maxHealtPoints, $str,$intl,$agi,$pDef,$mDef] = $race::getStats();
         
@@ -26,4 +25,6 @@ class CharacterManager{
         GameAnnouncer::presentCharacter($character);
         return  $character;
     }
+
+
 }

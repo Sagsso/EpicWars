@@ -4,13 +4,17 @@
 class Skill {
     private $name;
     private $description;
-    private $type;
+    private $skillType;
+    private $attackType;
+    private $boost=[];
 
-    public function __construct($name, $description, $type)
+    public function __construct(string $name, string $description, string $skillType, string $attackType, array $boost)
     {
         $this->name = $name;
         $this->description = $description;
-        $this->type = $type;
+        $this->skillType = $skillType;
+        $this->attackType = $attackType;
+        $this->boost = $boost;
     }
 
     
@@ -56,21 +60,61 @@ class Skill {
     }
 
     /**
-     * Get the value of type
+     * Get the value of skillType
      */ 
-    public function getType()
+    public function getSkillType()
     {
-        return $this->type;
+        return $this->skillType;
     }
 
     /**
-     * Set the value of type
+     * Set the value of skillType
      *
      * @return  self
      */ 
-    public function setType($type)
+    public function setSkillType($skillType)
     {
-        $this->type = $type;
+        $this->skillType = $skillType;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of attackType
+     */ 
+    public function getAttackType()
+    {
+        return $this->attackType;
+    }
+
+    /**
+     * Set the value of attackType
+     *
+     * @return  self
+     */ 
+    public function setAttackType($attackType)
+    {
+        $this->attackType = $attackType;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of boost
+     */ 
+    public function getBoost()
+    {
+        return $this->boost;
+    }
+
+    /**
+     * Set the value of boost
+     *
+     * @return  self
+     */ 
+    public function setBoost($boost)
+    {
+        $this->boost = $boost;
 
         return $this;
     }

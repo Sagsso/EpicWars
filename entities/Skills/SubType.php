@@ -2,12 +2,11 @@
 
 
 class SubType {
-    
+
     private $name;
     private $description;
-    
-    public function __construct(string $name, string $description)
-    {
+
+    public function __construct(string $name, string $description){
         $this->name = $name;
         $this->description = $description;
     }
@@ -15,9 +14,8 @@ class SubType {
 
     /**
      * Get the value of name
-     */ 
-    public function getName()
-    {
+     */
+    public function getName(){
         return $this->name;
     }
 
@@ -25,7 +23,7 @@ class SubType {
      * Set the value of name
      *
      * @return  self
-     */ 
+     */
     public function setName($name)
     {
         $this->name = $name;
@@ -35,7 +33,7 @@ class SubType {
 
     /**
      * Get the value of description
-     */ 
+     */
     public function getDescription()
     {
         return $this->description;
@@ -45,9 +43,8 @@ class SubType {
      * Set the value of description
      *
      * @return  self
-     */ 
-    public function setDescription($description)
-    {
+     */
+    public function setDescription($description){
         $this->description = $description;
 
         return $this;

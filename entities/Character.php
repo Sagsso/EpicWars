@@ -17,9 +17,10 @@ class Character {
     private $xp;
     private $race;
     private $playableClass;
+    private $skills=[];
+    private $weapons=[];
 
-    public function __construct( $name, $sex, $bodyType, $race, $playableClass, $str, $intl ,$agi ,$pDef ,$mDef ,$xp, $healtPoints,$maxHealtPoints, $level)
-    {
+    public function __construct( $name, $sex, $bodyType, $race, $playableClass, $str, $intl ,$agi ,$pDef ,$mDef ,$xp, $healtPoints,$maxHealtPoints, $level){
         $this->name = $name;
         $this->sex = $sex;
         $this->bodyType = $bodyType;
@@ -39,8 +40,7 @@ class Character {
     /**
      * Get the value of name
      */ 
-    public function getName()
-    {
+    public function getName(){
         return $this->name;
     }
 
@@ -49,8 +49,7 @@ class Character {
      *
      * @return  self
      */ 
-    public function setName($name)
-    {
+    public function setName($name){
         $this->name = $name;
 
         return $this;
@@ -59,8 +58,7 @@ class Character {
     /**
      * Get the value of sex
      */ 
-    public function getSex()
-    {
+    public function getSex(){
         return $this->sex;
     }
 
@@ -69,8 +67,7 @@ class Character {
      *
      * @return  self
      */ 
-    public function setSex($sex)
-    {
+    public function setSex($sex){
         $this->sex = $sex;
 
         return $this;
@@ -79,8 +76,7 @@ class Character {
     /**
      * Get the value of bodyType
      */ 
-    public function getBodyType()
-    {
+    public function getBodyType(){
         return $this->bodyType;
     }
 
@@ -89,8 +85,7 @@ class Character {
      *
      * @return  self
      */ 
-    public function setBodyType($bodyType)
-    {
+    public function setBodyType($bodyType){
         $this->bodyType = $bodyType;
 
         return $this;
@@ -99,8 +94,7 @@ class Character {
     /**
      * Get the value of healtPoints
      */ 
-    public function getHealtPoints()
-    {
+    public function getHealtPoints(){
         return $this->healtPoints;
     }
 
@@ -109,8 +103,7 @@ class Character {
      *
      * @return  self
      */ 
-    public function setHealtPoints($healtPoints)
-    {
+    public function setHealtPoints($healtPoints){
         $this->healtPoints = $healtPoints;
 
         return $this;
@@ -119,8 +112,7 @@ class Character {
     /**
      * Get the value of maxHealtPoints
      */ 
-    public function getMaxHealtPoints()
-    {
+    public function getMaxHealtPoints(){
         return $this->maxHealtPoints;
     }
 
@@ -129,8 +121,7 @@ class Character {
      *
      * @return  self
      */ 
-    public function setMaxHealtPoints($maxHealtPoints)
-    {
+    public function setMaxHealtPoints($maxHealtPoints){
         $this->maxHealtPoints = $maxHealtPoints;
 
         return $this;
@@ -139,8 +130,7 @@ class Character {
     /**
      * Get the value of level
      */ 
-    public function getLevel()
-    {
+    public function getLevel(){
         return $this->level;
     }
 
@@ -149,8 +139,7 @@ class Character {
      *
      * @return  self
      */ 
-    public function setLevel($level)
-    {
+    public function setLevel($level){
         $this->level = $level;
 
         return $this;
@@ -159,8 +148,7 @@ class Character {
     /**
      * Get the value of str
      */ 
-    public function getStr()
-    {
+    public function getStr(){
         return $this->str;
     }
 
@@ -169,8 +157,7 @@ class Character {
      *
      * @return  self
      */ 
-    public function setStr($str)
-    {
+    public function setStr($str){
         $this->str = $str;
 
         return $this;
@@ -179,8 +166,7 @@ class Character {
     /**
      * Get the value of intl
      */ 
-    public function getIntl()
-    {
+    public function getIntl(){
         return $this->intl;
     }
 
@@ -189,8 +175,7 @@ class Character {
      *
      * @return  self
      */ 
-    public function setIntl($intl)
-    {
+    public function setIntl($intl){
         $this->intl = $intl;
 
         return $this;
@@ -199,8 +184,7 @@ class Character {
     /**
      * Get the value of agi
      */ 
-    public function getAgi()
-    {
+    public function getAgi(){
         return $this->agi;
     }
 
@@ -209,8 +193,7 @@ class Character {
      *
      * @return  self
      */ 
-    public function setAgi($agi)
-    {
+    public function setAgi($agi){
         $this->agi = $agi;
 
         return $this;
@@ -219,8 +202,7 @@ class Character {
     /**
      * Get the value of pDef
      */ 
-    public function getPDef()
-    {
+    public function getPDef(){
         return $this->pDef;
     }
 
@@ -229,8 +211,7 @@ class Character {
      *
      * @return  self
      */ 
-    public function setPDef($pDef)
-    {
+    public function setPDef($pDef){
         $this->pDef = $pDef;
 
         return $this;
@@ -239,8 +220,7 @@ class Character {
     /**
      * Get the value of mDef
      */ 
-    public function getMDef()
-    {
+    public function getMDef(){
         return $this->mDef;
     }
 
@@ -249,8 +229,7 @@ class Character {
      *
      * @return  self
      */ 
-    public function setMDef($mDef)
-    {
+    public function setMDef($mDef){
         $this->mDef = $mDef;
 
         return $this;
@@ -259,8 +238,7 @@ class Character {
     /**
      * Get the value of xp
      */ 
-    public function getXp()
-    {
+    public function getXp(){
         return $this->xp;
     }
 
@@ -269,8 +247,7 @@ class Character {
      *
      * @return  self
      */ 
-    public function setXp($xp)
-    {
+    public function setXp($xp){
         $this->xp = $xp;
 
         return $this;
@@ -279,8 +256,7 @@ class Character {
     /**
      * Get the value of race
      */ 
-    public function getRace()
-    {
+    public function getRace(){
         return $this->race;
     }
 
@@ -289,8 +265,7 @@ class Character {
      *
      * @return  self
      */ 
-    public function setRace($race)
-    {
+    public function setRace($race){
         $this->race = $race;
 
         return $this;
@@ -299,8 +274,7 @@ class Character {
     /**
      * Get the value of playableClass
      */ 
-    public function getPlayableClass()
-    {
+    public function getPlayableClass(){
         return $this->playableClass;
     }
 
@@ -309,9 +283,57 @@ class Character {
      *
      * @return  self
      */ 
-    public function setPlayableClass($playableClass)
-    {
+    public function setPlayableClass($playableClass){
         $this->playableClass = $playableClass;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of skills
+     */ 
+    public function getSkills()
+    {
+        return $this->skills;
+    }
+
+    /**
+     * Set the value of skills
+     *
+     * @return  self
+     */ 
+    public function setSkills($skills)
+    {
+        array_push($this->skills, $skills);
+
+        return $this;
+    }
+
+    public function deleteSkill($skill) {
+        $i = \array_search($skill->getName(), $this->skills);
+        unset($this->skills[$i]);
+    }
+
+    /**
+     * Get the value of weapons
+     */ 
+    public function getWeapons()
+    {
+        return $this->weapons;
+    }
+
+    /**
+     * Set the value of weapons
+     *
+     * @return  self
+     */ 
+    public function setWeapons($weapons)
+    {
+        if(sizeof($this->weapons)<2) {
+            array_push($this->weapons, $weapons);
+        } else {
+            echo "El jugador no puede tener más de dos armas.";
+        }
 
         return $this;
     }

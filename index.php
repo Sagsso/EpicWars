@@ -26,17 +26,19 @@ $golpeTrampero =  SkillManager::create('Golpe Trampero', 'El personaje distrae a
 
 $tajoMortal =  SkillManager::create('Tajo Mortal', 'El personaje salta con intenciones despiadadas y raja a su enemigo inflingiendo 200% de daño con armas.', 'fisico','guerrero', array("dmgWR" => 2, "dmgWL" => 2));
 
-$meditacion =  SkillManager::create('Meditacion', 'El personaje medita un momento incrementando su agilidad e intelecto en 5%.', 'magico','basico', array("agi" => 1.5, "intl" => 1.5));
+$meditacion =  SkillManager::create('Meditacion', 'El personaje medita un momento incrementando su agilidad e intelecto en 5%.', 'magico','basico', array("agi" => 1.05, "intl" => 1.05));
 
-$calcinacion =  SkillManager::create('Calcinación', 'El personaje invoca el poder arcano y el elemento del fuego para quemar a su enemigo inflingiendo 40% de su intelecto como daño mágico.', 'magico','mago', array("intl" => 0.4,));
+$calcinacion =  SkillManager::create('Calcinación', 'El personaje invoca el poder arcano y el elemento del fuego para quemar a su enemigo inflingiendo 40% de su intelecto como daño mágico.', 'magico','mago', array("intl" => 0.4, "atck" => true));
 
-$tacticasCombate =  SkillManager::create('Tacticas de Combate', 'El personaje repasa el campo de batalla preparando su siguiente golpe, esto incrementa su fuerza y agilidad en un 5%.', 'fisico','avanzado', array("str"=>1.5, "agi"=>1.5));
+$tacticasCombate =  SkillManager::create('Tacticas de Combate', 'El personaje repasa el campo de batalla preparando su siguiente golpe, esto incrementa su fuerza y agilidad en un 5%.', 'fisico','avanzado', array("str"=>1.05, "agi"=>1.05));
 
 
 // SkillManager::learnSkill($calcinacion, $human);
 SkillManager::learnSkill($golpeTrampero, $orc);
 SkillManager::learnSkill($golpeConArma, $orc);
 SkillManager::learnSkill($golpeConArma, $human);
+SkillManager::learnSkill($calcinacion, $human);
+SkillManager::learnSkill($meditacion, $human);
 // SkillManager::learnSkill($golpeConArma, $human);
 
 $baston = WeaponManager::create('Bastón de los reyes', 25, 2);
@@ -58,4 +60,8 @@ echo $orc->getWeapons()['l']->getName()."<br>";
 DamageManager::attack($orc, $golpeConArma, $human);
 DamageManager::attack($orc, $golpeTrampero, $human);
 DamageManager::attack($human, $golpeConArma, $orc);
+DamageManager::attack($human, $calcinacion, $orc);
+DamageManager::attack($human, $meditacion, $orc);
+
+
 // SkillManager::canLearn($mySkill, $orc);

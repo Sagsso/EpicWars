@@ -103,8 +103,8 @@ class Character {
      *
      * @return  self
      */ 
-    public function setHealtPoints($healtPoints){
-        $this->healtPoints = $healtPoints;
+    public function setHealtPoints(float $healtPoints){
+        $this->healtPoints = round($healtPoints,1, PHP_ROUND_HALF_UP);
 
         return $this;
     }

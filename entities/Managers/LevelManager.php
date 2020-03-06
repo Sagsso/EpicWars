@@ -7,13 +7,16 @@ class LevelManager {
     private static $maxLevel = 100;
     private static $minLevel = 1;
 
-    public static function levelUp() {
-        
+    public static function levelUp(Character $character) {
+            $character->setLevel($character->getLevel()+1);
+            echo $character->getName()." subió al nivel ".$character->getLevel();
     }
-    public static function levelDown() {
+    // public static function levelDown() {
         
-    }
-    public static function getExpForLevel() {
-        
+    // }
+    public static function getExpForLevel(Character $character) {
+        if ($character->getXp() >= $this->baseExp * $character->getLevel()) {
+            self::levelUp($character);
+        }
     }
 }

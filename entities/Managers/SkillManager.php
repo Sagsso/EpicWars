@@ -57,7 +57,7 @@ class SkillManager {
 
     }
 
-    public static function canLearn(Skill $skill, Character $character) {
+    private function canLearn(Skill $skill, Character $character) {
 
         $skills = array("picaro" => ['fisico', 'magico'], "mago" => ['fisico', 'magico'], "guerrero" => ['fisico']);
 

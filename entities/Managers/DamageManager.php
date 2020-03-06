@@ -63,12 +63,12 @@ class DamageManager{
                                         $finalDamage = $toAttack['finalDamage']*1.5;
                                         // echo "Probabilidad caída ".$probability. " - CriticalProbability: " . $toAttack['criticalImpact']."<br>";
                                         echo $owner->getName()." ataca con daño crítico a: ".$victim->getName()."<br>";
-                                        self::takeDamage($finalDamage,$skill->getSkillType(), $victim);
+                                        self::takeDamage($finalDamage,$skill->getType(), $victim);
                                 } else {
                                         $finalDamage = $toAttack['finalDamage'];
                                         // echo "Probabilidad caída " . $probability . " - CriticalProbability: " . $toAttack['criticalImpact'] . "<br>";
                                         echo $owner->getName()." ataca a: ".$victim->getName()."<br>";
-                                        self::takeDamage($finalDamage, $skill->getSkillType(), $victim);
+                                        self::takeDamage($finalDamage, $skill->getType(), $victim);
                                 }
 
                         } else {
@@ -120,14 +120,14 @@ class DamageManager{
         private function boostPerType (float $finalDamage, Skill $skill, Character $character) {
                 $criticalImpact = 0.05;
                 
-                if($skill->getSkillType() == 'fisico') {
+                if($skill->getType() == 'fisico') {
 
                         $finalDamage = $finalDamage + ($finalDamage * 0.02)*($character->getStr()/10);
                         $criticalImpact = $criticalImpact + ($criticalImpact * 0.01)*($character->getAgi()/10);
 
                         return array('finalDamage' => $finalDamage, 'criticalImpact' => $criticalImpact);
 
-                } else if ($skill->getSkillType() == 'magico') {
+                } else if ($skill->getType() == 'magico') {
                         $finalDamage = $finalDamage + ($finalDamage * 0.02) * ($character->getIntl() / 10);
                         $criticalImpact = $criticalImpact + ($criticalImpact * 0.01) * ($character->getAgi() / 10);
 

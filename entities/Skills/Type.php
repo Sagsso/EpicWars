@@ -1,76 +1,68 @@
-<?php 
-
+<?php
 
 class Type {
-    private $name;
-    private $description;
-    private $subtype;
 
-    public function __construct($name, $description, $subtype)
+    private static $instance;
+    private $types = [];
+    
+    private function __construct()
     {
-        $this->name = $name;
-        $this->description = $description;
-        $this->subtype = $subtype;
+        
     }
 
-
-    /**
-     * Get the value of name
-     */ 
-    public function getName()
+    public static function getInstance()
     {
-        return $this->name;
+        if (!self::$instance instanceof self) {
+            self::$instance = new self();
+        }
+
+        return self::$instance;
     }
 
-    /**
-     * Set the value of name
-     *
-     * @return  self
-     */ 
-    public function setName($name)
-    {
-        $this->name = $name;
+    //Para ontener solo los tipos
 
-        return $this;
+    public function getTypes()
+    {
+        $typesArray = [];
+        $keysTypes = array_keys($this->types);
+        foreach ($keysTypes as $value) {
+            array_push($typesArray,$value);
+        }
+        return $typesArray;
     }
 
-    /**
-     * Get the value of description
-     */ 
-    public function getDescription()
+    //Para obtener el arreglo completo
+
+    public function getAllTypes()
     {
-        return $this->description;
+        return $this->types;
     }
 
-    /**
-     * Set the value of description
-     *
-     * @return  self
-     */ 
-    public function setDescription($description)
-    {
-        $this->description = $description;
+    //Para obtener los subtipos de un tipo en específico
 
-        return $this;
+    public function getSubTypesOf(String $type)
+    {
+        $keysTypes = array_keys($this->types);
+        if (in_array($type,$keysTypes)) {
+            return $this->types[$type];
+        }
+        return null;
     }
 
-    /**
-     * Get the value of subtype
-     */ 
-    public function getSubtype()
+    public function addType(String $name)
     {
-        return $this->subtype;
+        $this->types[$name]=[];
     }
 
-    /**
-     * Set the value of subtype
-     *
-     * @return  self
-     */ 
-    public function setSubtype($subtype)
-    {
-        $this->subtype = $subtype;
+    //$t1 es el tipo al que se le va asignar el subtipo, es decir, $t2
 
-        return $this;
+    public function addSubType(String $t1, String $t2)
+    {
+        $keysTypes = array_keys($this->types);
+        if (in_array($t1,$keysTypes)) {
+            array_push($this->types[$t1],$t2);
+        }else{
+            echo 'El tipo de nombre '.$t1.' no existe';
+        }
     }
 }

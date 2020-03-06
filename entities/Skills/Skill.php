@@ -1,27 +1,25 @@
 <?php
 
-
-class Skill {
+class Skill
+{
     private $name;
     private $description;
-    private $skillType;
-    private $attackType;
-    private $boost=[];
+    private $type;
+    private $subType;
+    private $boost = [];
 
-    public function __construct(string $name, string $description, string $skillType, string $attackType, array $boost)
+    public function __construct($name, String $type, String $subType, String $description, array $boost)
     {
         $this->name = $name;
         $this->description = $description;
-        $this->skillType = $skillType;
-        $this->attackType = $attackType;
+        $this->type = $type;
+        $this->subType = $subType;
         $this->boost = $boost;
     }
 
-    
-
     /**
      * Get the value of name
-     */ 
+     */
     public function getName()
     {
         return $this->name;
@@ -31,7 +29,7 @@ class Skill {
      * Set the value of name
      *
      * @return  self
-     */ 
+     */
     public function setName($name)
     {
         $this->name = $name;
@@ -41,7 +39,7 @@ class Skill {
 
     /**
      * Get the value of description
-     */ 
+     */
     public function getDescription()
     {
         return $this->description;
@@ -51,7 +49,7 @@ class Skill {
      * Set the value of description
      *
      * @return  self
-     */ 
+     */
     public function setDescription($description)
     {
         $this->description = $description;
@@ -60,62 +58,52 @@ class Skill {
     }
 
     /**
-     * Get the value of skillType
-     */ 
-    public function getSkillType()
+     * Get the value of type
+     */
+    public function getType()
     {
-        return $this->skillType;
+        return $this->type;
     }
 
     /**
-     * Set the value of skillType
+     * Set the value of type
      *
      * @return  self
-     */ 
-    public function setSkillType($skillType)
+     */
+    public function setType($type)
     {
-        $this->skillType = $skillType;
+        $this->type = $type;
 
         return $this;
     }
 
     /**
-     * Get the value of attackType
-     */ 
-    public function getAttackType()
+     * Get the value of type
+     */
+    public function getSubType()
     {
-        return $this->attackType;
+        return $this->subType;
     }
 
     /**
-     * Set the value of attackType
+     * Set the value of type
      *
      * @return  self
-     */ 
-    public function setAttackType($attackType)
+     */
+    public function setSubType($subType)
     {
-        $this->attackType = $attackType;
+        $this->subType = $subType;
 
         return $this;
     }
 
-    /**
-     * Get the value of boost
-     */ 
     public function getBoost()
     {
         return $this->boost;
     }
 
-    /**
-     * Set the value of boost
-     *
-     * @return  self
-     */ 
-    public function setBoost($boost)
+    public function setBoost(array $boost)
     {
         $this->boost = $boost;
-
-        return $this;
     }
 }

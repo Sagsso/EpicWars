@@ -11,10 +11,10 @@ class WeaponManager {
 
     public static function assignWeapon(Weapon $weapon, Character $character) {
 
-        $support1Weapon = ['picaro', 'mago', 'guerrero'];
-        $support2Weapons = ['mago', 'guerrero'];
-
-        $weaponsSupport = array('1' => $support1Weapon, '2' => $support2Weapons );
+        $weaponsSupport = array(
+            1 => [CLASSES[0], CLASSES[1], CLASSES[2]],
+            2 => [CLASSES[0], CLASSES[2]]
+        );
     
         $clase = $character->getPlayableClass();
 

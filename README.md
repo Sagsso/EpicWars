@@ -47,7 +47,7 @@ Las clases permiten definir el camino del personaje en un conjunto de habilidade
 
 * **Mago**: Los magos tienen habilidades únicas en el control de las fuerzas arcanas, por esto son los únicos que pueden aprender skills de tipo mágicas, aunque también pueden aprender de tipo físicas, siempre que dichas habilidades sean ataques de tipo básicos. Los Magos pueden usar armas de dos manos como: bastones; también armas de una mano como: varitas, espadas y dagas.
 * **Guerrero**: Los guerreros tienen habilidades prominentes en el uso de armas y la fuerza bruta, pero no logran manipular las fuerzas mágicas, por esta razón los guerreros no pueden aprender habilidades mágicas de ningún tipo, mientras que logran aprender habilidades de guerrero y físicas básicas y avanzadas. Los guerreros pueden usar armas de dos manos como: espadas, bastones y hachas; también armas de una mano como: dagas, espadas y hachas.
-* **Picaro**: Los picaros siempre muy astutos pueden aprender habilidades físicas y mágicas básicas, además de las habilidades propias de pícaro. Los picaros pueden no pueden usar armas de dos manos,  pero son expertos en armas de una mano como: dagas, espadas y hachas.
+* **Picaro**: Los picaros siempre muy astutos pueden aprender habilidades físicas y mágicas básicas, además de las habilidades propias de pícaro. Los picaros no pueden usar armas de dos manos,  pero son expertos en armas de una mano como: dagas, espadas y hachas.
 
 
 

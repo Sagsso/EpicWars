@@ -309,9 +309,15 @@ class Character {
         return $this;
     }
 
-    public function deleteSkill($skill) {
-        $i = \array_search($skill->getName(), $this->skills);
-        unset($this->skills[$i]);
+    public function removeSkills(String $skill)
+    {
+        for ($i = 0; $i < sizeof($this->skills); $i++) {
+            if (($this->skills[$i]->getName()) == $skill) {
+                array_splice($this->skills, $i, 1);
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

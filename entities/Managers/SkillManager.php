@@ -1,19 +1,18 @@
 <?php
 
-// namespace entities\Managers;
-
 class SkillManager {
 
-    public static function create(String $name, String $type, String $subtype, String $description, array $boost)
+    public static function create(String $name, String $type, String $subtype, String $description, array $boost, array $dmg)
     {
         $validation = Type::getInstance()->getSubTypesOf($type);
         if (!$validation) {
             echo "El tipo " . $type . " no existe <br>";
+            return null;
         } else {
             for ($i = 0; $i < sizeof($validation); $i++) {
                 if ($validation[$i] == $subtype) {
                     echo "Se ha creado la skill " . $name . "<br>";
-                    $skill = new Skill($name, $type, $subtype, $description, $boost);
+                    $skill = new Skill($name, $type, $subtype, $description, $boost, $dmg);
                     return  $skill;
                 }
             }

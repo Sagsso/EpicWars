@@ -1,18 +1,5 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-// namespace entities;
-
-/**
- * Description of GameAnnouncer
- *
- * @author pabhoz
- */
 class GameAnnouncer {
     
     public static function presentCharacter(Character $character){ 
@@ -27,7 +14,7 @@ class GameAnnouncer {
         echo "PDef: ".$character->getPDef()."</br>";
         echo "MDef: ".$character->getMDef()."</br>";
         echo "BodyType: ".$character->getBodyType()."</br>";
-        echo "Class: ".$character->getPlayableClass()."</br></br>";
+        echo "Class: ".$character->getClase()::getClaseName()."</br></br>";
 
     }
 }

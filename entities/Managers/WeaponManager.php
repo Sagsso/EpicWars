@@ -11,25 +11,46 @@ class WeaponManager {
 
     public static function assignWeapon(Weapon $weapon, Character $character) {
 
-        $weaponsSupport = array(
-            1 => [CLASSES[0], CLASSES[1], CLASSES[2]],
-            2 => [CLASSES[0], CLASSES[2]]
-        );
-    
-        $clase = $character->getPlayableClass();
+        $clase = $character->getClase();
+        $weapons = $character->getWeapons();
+        $weaponsSupport = $clase->allowedWeapons();
 
-        foreach ($weaponsSupport[strval($weapon->getHands())] as $supportClass ) {
-            if($clase == $supportClass) {
-                echo $character->setWeapons($weapon);
-                // echo "El arma ".$weapon->getName()." ha sido asignada al jugador ".$character->getName()."<br>";
-                return 0;
+        if(in_array($weapon, $weaponsSupport[$i])) {
+            
+            if($weapon->getHands()==1) {
+                if ($weapons['r'] == null) {
+                    $weapons['r'] = $weapon;       
+                    return "El arma " . $weapon->getName() . " ha sido asignada al jugador " . $name . " en la mano derecha.<br>";
+        
+                } elseif ($weapons['l'] == null){
+                    $weapons['l'] = $weapon;
+                    return "El arma " . $weapon->getName() . " ha sido asignada al jugador " . $name . " en la mano izquierda.<br>";
+        
+                } else {
+                    return "El jugador no puede tener más de dos armas.<br>";
+                }
+            } else {
+                $weapons = [$weapon];
+                return "El arma de dos manos " . $weapon->getName() . " ha sido asignada al jugador " . $name . ".<br>";
             }
+            
+            $character->setWeapons($weapon);
+            echo "El arma ".$weapon->getName()." ha sido asignada al jugador ".$character->getName()."<br>";
+            
+        }else{
+            echo "El jugador ".$character->getName()." no es apto para el arma ".$weapon->getName()." porque es de ".$weapon->getHands()." manos.<br>";
         }
 
-        echo "El jugador ".$character->getName()." no es apto para el arma ".$weapon->getName()." porque es de ".$weapon->getHands()." manos.<br>";
+    }
 
-
-
+    public static function isAWeapon(array $weapons) {
+        for ($i=0; $i < sizeof($weapons); $i++) { 
+            if (get_class($weapons[$i])!=='Weapon') {
+                echo $weapons[$i]." no es de tipo Weapon";
+                return false;
+            }
+        }
+        return true;
     }
 
 }

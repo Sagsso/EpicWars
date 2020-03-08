@@ -1,7 +1,5 @@
 <?php
 
-// namespace entities;
-
 class Character {
     private $name = "";
     private $sex;
@@ -16,11 +14,11 @@ class Character {
     private $mDef;
     private $xp;
     private $race;
-    private $playableClass;
+    private $clase;
     private $skills=[];
     private $weapons=["r" => null, "l" => null];
 
-    public function __construct( $name, $sex, $bodyType, $race, $playableClass, $str, $intl ,$agi ,$pDef ,$mDef ,$xp, $healtPoints,$maxHealtPoints, $level){
+    public function __construct( $name, $sex, $bodyType, $race, $clase, $str, $intl ,$agi ,$pDef ,$mDef ,$xp, $healtPoints,$maxHealtPoints, $level){
         $this->name = $name;
         $this->sex = $sex;
         $this->bodyType = $bodyType;
@@ -34,7 +32,7 @@ class Character {
         $this->mDef = $mDef;
         $this->xp = $xp;
         $this->race = $race;
-        $this->playableClass = $playableClass;
+        $this->clase = $clase;
     }
     
     /**
@@ -272,19 +270,19 @@ class Character {
     }
 
     /**
-     * Get the value of playableClass
+     * Get the value of clase
      */ 
-    public function getPlayableClass(){
-        return $this->playableClass;
+    public function getClase(){
+        return $this->clase;
     }
 
     /**
-     * Set the value of playableClass
+     * Set the value of clase
      *
      * @return  self
      */ 
-    public function setPlayableClass($playableClass){
-        $this->playableClass = $playableClass;
+    public function setClase($clase){
+        $this->clase = $clase;
 
         return $this;
     }
@@ -302,22 +300,16 @@ class Character {
      *
      * @return  self
      */ 
-    public function setSkills($skills)
+    public function addSkills($skills)
     {
         array_push($this->skills, $skills);
 
         return $this;
     }
 
-    public function removeSkills(String $skill)
+    public function removeSkills(int $index)
     {
-        for ($i = 0; $i < sizeof($this->skills); $i++) {
-            if (($this->skills[$i]->getName()) == $skill) {
-                array_splice($this->skills, $i, 1);
-                return true;
-            }
-        }
-        return false;
+        array_splice($this->skills, $index, 1);
     }
 
     /**
@@ -335,24 +327,6 @@ class Character {
      */ 
     public function setWeapons($weapon)
     {
-        if($weapon->getHands()==1) {
-            if ($this->weapons['r'] == null) {
-                $this->weapons['r'] = $weapon;       
-                return "El arma " . $weapon->getName() . " ha sido asignada al jugador " . $this->name . " en la mano derecha.<br>";
-    
-            } elseif ($this->weapons['l'] == null){
-                $this->weapons['l'] = $weapon;
-                return "El arma " . $weapon->getName() . " ha sido asignada al jugador " . $this->name . " en la mano izquierda.<br>";
-    
-            } else {
-                return "El jugador no puede tener más de dos armas.<br>";
-            }
-        } else {
             $this->weapons = [$weapon];
-            return "El arma de dos manos " . $weapon->getName() . " ha sido asignada al jugador " . $this->name . ".<br>";
-
-        }
-
-        return $this;
     }
 }

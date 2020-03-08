@@ -1,11 +1,8 @@
 <?php
 
-// namespace entities\Managers;
-
-
 class CharacterManager{
 
-    public static function create($name, $sex, $bodyType, $race, $playableClass){
+    public static function create($name, $sex, $bodyType, $race, $clase){
 
         [$maxHealtPoints, $str, $intl, $agi, $pDef, $mDef] = $race::getStats();
         $xp = 1;
@@ -16,7 +13,7 @@ class CharacterManager{
             SEX[$sex],
             BODY_TYPES[$bodyType],
             $race,
-            CLASSES[$playableClass],
+            $clase,
             $str,
             $intl,
             $agi,

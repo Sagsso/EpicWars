@@ -1,7 +1,5 @@
 <?php
 
-// namespace entities\Managers;
-
 class DamageManager{
         public static function die(Character $character) {
                 echo $character->getName().' ha muerto.<br>';

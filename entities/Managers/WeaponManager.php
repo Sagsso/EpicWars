@@ -15,30 +15,36 @@ class WeaponManager {
         $weapons = $character->getWeapons();
         $weaponsSupport = $clase->allowedWeapons();
 
-        if(in_array($weapon, $weaponsSupport[$i])) {
+        if(in_array($weapon, $weaponsSupport)) {
             
             if($weapon->getHands()==1) {
                 if ($weapons['r'] == null) {
                     $weapons['r'] = $weapon;       
-                    return "El arma " . $weapon->getName() . " ha sido asignada al jugador " . $name . " en la mano derecha.<br>";
-        
-                } elseif ($weapons['l'] == null){
-                    $weapons['l'] = $weapon;
-                    return "El arma " . $weapon->getName() . " ha sido asignada al jugador " . $name . " en la mano izquierda.<br>";
-        
-                } else {
-                    return "El jugador no puede tener más de dos armas.<br>";
+                    echo "El arma " . $weapon->getName() . " ha sido asignada al jugador " . $character->getName() . " en la mano derecha.<br>";
+                    $character->setWeapons($weapons);
+                    return 0;
                 }
+                if ($weapons['l'] == null){
+                    $weapons['l'] = $weapon;
+                    echo "El arma " . $weapon->getName() . " ha sido asignada al jugador " . $character->getName() . " en la mano izquierda.<br>";
+                    $character->setWeapons($weapons);
+                    return 0;
+                }
+                echo "El jugador no puede tener más de dos armas.<br>";
+                $character->setWeapons($weapons);
+                return 0;
+                
             } else {
-                $weapons = [$weapon];
-                return "El arma de dos manos " . $weapon->getName() . " ha sido asignada al jugador " . $name . ".<br>";
+                $weapons['r'] = $weapon;
+                $weapons['l'] = $weapon;
+                echo "El arma de dos manos " . $weapon->getName() . " ha sido asignada al jugador " . $character->getName() . ".<br>";
+                $character->setWeapons($weapons);
+                return 0;
             }
             
-            $character->setWeapons($weapon);
-            echo "El arma ".$weapon->getName()." ha sido asignada al jugador ".$character->getName()."<br>";
             
         }else{
-            echo "El jugador ".$character->getName()." no es apto para el arma ".$weapon->getName()." porque es de ".$weapon->getHands()." manos.<br>";
+            echo "El jugador ".$character->getName()." no es apto para el arma ".$weapon->getName()." porque es de clase ".$clase::getClaseName()."<br>";
         }
 
     }

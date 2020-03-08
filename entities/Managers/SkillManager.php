@@ -44,11 +44,11 @@ class SkillManager {
 
         $keys = array_keys($typesSupport);
         if (!in_array($type, $keys)) {
-            echo "La clase " . $clase::getClaseName() . " no soporta el tipo".$type." <br>";
+            echo "La clase " . $clase::getClaseName() . " no soporta el tipo ".$type." <br>";
             return false;
         } else {
             if (!in_array($subtype,$typesSupport[$type])) {
-                echo "La clase " . $clase::getClaseName() . " no soporta el subtipo".$subtype." <br>";
+                echo "La clase " . $clase::getClaseName() . " no soporta el subtipo ".$subtype." <br>";
                 return  false;
             }
         }

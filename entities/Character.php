@@ -327,6 +327,6 @@ class Character {
      */ 
     public function setWeapons($weapon)
     {
-            $this->weapons = [$weapon];
+            $this->weapons = $weapon;
     }
 }

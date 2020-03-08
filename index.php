@@ -39,7 +39,7 @@ array("dmgWR" => 2, "dmgWL" => 2));
 $meditacion =  SkillManager::create('Meditacion', 'Magico', 'Basico', 'El personaje medita un momento incrementando 
 su agilidad e intelecto en 5%.', array("agi" => 1.05, "intl" => 1.05), array());
 $calcinacion =  SkillManager::create('Calcinación', 'Magico', 'Mago', 'El personaje invoca el poder arcano y el elemento 
-del fuego para quemar a su enemigo inflingiendo 40% de su intelecto como daño mágico.', array(), array("dmg" => 0.4));
+del fuego para quemar a su enemigo inflingiendo 40% de su intelecto como daño mágico.', array(), array("dmgIntl" => 0.4));
 
 echo "<br>";
 
@@ -67,48 +67,54 @@ $daga2 = WeaponManager::create('Daga de los bandidos', 17, 1);
 
 echo "<br>";
 
-//Asignamos las tipos que pueden aceptar cada clase
-$no=1;
+//Asignamos las tipos y las armas que pueden aceptar cada clase
+
 Mage::getInstance()->setAllowedTypes(array('Fisico'=>['Basico'], 'Magico'=>['Basico','Mago']));
 Mage::getInstance()->setAllowedWeapons(array($baston));
+Rogue::getInstance()->setAllowedTypes(array('Fisico'=>['Basico','Picaro'], 'Magico'=>['Basico']));
+Rogue::getInstance()->setAllowedWeapons(array($daga1,$daga2));
+Warrior::getInstance()->setAllowedTypes(array('Fisico'=>['Basico','Avanzado','Guerrero']));
+Warrior::getInstance()->setAllowedWeapons(array($hacha));
 
 echo "<br>";
 
 //Creamos los personajes
 
-$human = CharacterManager::create("Gerald",0,1,Human::class,Mage::getInstance());/*
-$orc = CharacterManager::create("Garrosh",1,0,Orc::class,1);
-$orc = CharacterManager::create("Thrum",1,0,Orc::class,2);
-$dwarf = CharacterManager::create("Tyrion",2,2,Dwarf::class,2);
-$elf = CharacterManager::create("Dobby",1,1,Elf::class,1);
-*/
+$human = CharacterManager::create("Gerald",0,1,Human::class,Mage::getInstance());
+$orc = CharacterManager::create("Garrosh",1,0,Orc::class,Rogue::getInstance());
+$orc2 = CharacterManager::create("Thrum",1,0,Orc::class,Warrior::getInstance());
+$dwarf = CharacterManager::create("Tyrion",2,2,Dwarf::class,Warrior::getInstance());
+$elf = CharacterManager::create("Dobby",1,1,Elf::class,Rogue::getInstance());
 
-//SkillManager::learnSkill($golpeTrampero, $orc);
-//SkillManager::learnSkill($golpeConArma, $orc);
+echo "<br>";
+
+//Asignamos skills para los personajes
+
+SkillManager::learnSkill($golpeTrampero, $orc);
+SkillManager::learnSkill($golpeConArma, $orc);
 SkillManager::learnSkill($golpeConArma, $human);
 SkillManager::learnSkill($calcinacion, $human);
 SkillManager::learnSkill($meditacion, $human);
 
+echo "<br>";
+
+//Validamos que se puedan olvidar sólo si ya conocen la skill
+
 SkillManager::forgetSkill($tacticasCombate, $human);
 
-/*
+//Asignamos armas a los personajes
+
 WeaponManager::assignWeapon($baston, $orc);
 WeaponManager::assignWeapon($baston, $human);
 WeaponManager::assignWeapon($daga1, $orc);
 WeaponManager::assignWeapon($daga2, $orc);
 
-echo $orc->getSkills()[0]->getName()."<br>";
-// echo $human->getSkills()[1]->getName()."<br>";
+//Validamos que solo se pueden asignar armas dependiendo de la clase
 
-echo $orc->getWeapons()['r']->getName()."<br>";
-echo $orc->getWeapons()['l']->getName()."<br>";
+WeaponManager::assignWeapon($hacha, $orc);
 
 DamageManager::attack($orc, $golpeConArma, $human);
 DamageManager::attack($orc, $golpeTrampero, $human);
 DamageManager::attack($human, $golpeConArma, $orc);
 DamageManager::attack($human, $calcinacion, $orc);
 DamageManager::attack($human, $meditacion, $orc);
-
-
-// SkillManager::canLearn($mySkill, $orc);
-*/

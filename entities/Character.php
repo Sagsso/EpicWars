@@ -102,7 +102,11 @@ class Character {
      * @return  self
      */ 
     public function setHealtPoints(float $healtPoints){
-        $this->healtPoints = round($healtPoints,1, PHP_ROUND_HALF_UP);
+        if($healtPoints <= 0) {
+            $this->healtPoints =0;
+        } else {
+            $this->healtPoints = round($healtPoints,1, PHP_ROUND_HALF_UP);
+        }
 
         return $this;
     }

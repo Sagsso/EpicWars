@@ -35,8 +35,9 @@ class WeaponManager {
                 return 0;
                 
             } else {
-                $weapons['r'] = $weapon;
-                $weapons['l'] = $weapon;
+                $weapons['rl'] = $weapon;
+                $weapons['r'] = null;
+                $weapons['l'] = null;
                 echo "El arma de dos manos " . $weapon->getName() . " ha sido asignada al jugador " . $character->getName() . ".<br>";
                 $character->setWeapons($weapons);
                 return 0;

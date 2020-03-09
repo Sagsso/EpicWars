@@ -10,98 +10,70 @@ class DamageManager{
                 $character->setHealtPoints($character->getMaxHealtPoints()*0.1);
                 echo 'HP:'.$character->getHealtPoints();
         }
+
+        public static function buff(Character $character, Skill $skill) {
+
+                $actualStats = CharacterManager::getStatsArray($character);
+                $newStats = [];
+
+                $characterSkills = $character->getSkills();
+                $skillBoost = $skill->getBoost();
+
+
+                if (in_array($skill, $characterSkills)) {
+                        foreach ($skillBoost as $key => $value) {
+                                $newStats[$key] = $actualStats[$key]*$value;
+                        }
+                }
+
+                CharacterManager::setStats($newStats, $character);
+
+                        
+        }
         
         public static function attack(Character $owner,Skill $skill, Character $victim) {
                 
                 $finalDamage = 0;
-                $boostStats = [];
-                $numberOfWeapons = sizeof($owner->getWeapons());
+                $statsToAttack = CharacterManager::getStatsToAttack($owner);
+                $statsSkill = array_keys($skill->getDmg());
+                //añadimos los daños de Weapons al $statsToAttack
                 $characterSkills = $owner->getSkills();
 
-                if(in_array($skill,$characterSkills)){
-                        // echo "Tiene la skill.<br>";
-
-                        $newBoostKeys = array_keys($skill->getBoost());
-                        
-                        foreach ($newBoostKeys as $key) {
-
-                                switch ($key) {
-                                        case 'dmgWR':
-                                                if ($numberOfWeapons == 1) {
-                                                        $i = 0;
-                                                } else {
-                                                        $i = 'r';
-                                                }
-                                                $finalDamage += $owner->getWeapons()[$i]->getDamage() * $skill->getBoost()["dmgWR"];
-                                                break;
-                                        case 'dmgWL':
-                                                if ($numberOfWeapons == 2) {
-                                                        if ($owner->getWeapons()['l']) {
-                                                                $finalDamage += $owner->getWeapons()['l']->getDamage() * $skill->getBoost()["dmgWL"];
-                                                        }
-                                                }
-                                                break;
-                                        case 'intl':
-                                                if(in_array('atck', $newBoostKeys)) {
-                                                        $finalDamage = $owner->getIntl()*0.4;
-                                                }
-                                                break;
-                                        
-                                        default:
-                                                
-                                                break;
-                                }
-
-                        }
-                        if($finalDamage != 0) {
-                                $toAttack = self::boostPerType($finalDamage,$skill,$owner);
-
-                                $probability = mt_rand(1, 100);
-                                if($probability <= $toAttack['criticalImpact']*100){
-                                        $finalDamage = $toAttack['finalDamage']*1.5;
-                                        // echo "Probabilidad caída ".$probability. " - CriticalProbability: " . $toAttack['criticalImpact']."<br>";
-                                        echo $owner->getName()." ataca con daño crítico a: ".$victim->getName()."<br>";
-                                        self::takeDamage($finalDamage,$skill->getType(), $victim);
-                                } else {
-                                        $finalDamage = $toAttack['finalDamage'];
-                                        // echo "Probabilidad caída " . $probability . " - CriticalProbability: " . $toAttack['criticalImpact'] . "<br>";
-                                        echo $owner->getName()." ataca a: ".$victim->getName()."<br>";
-                                        self::takeDamage($finalDamage, $skill->getType(), $victim);
-                                }
-
-                        } else {
-                                foreach ($newBoostKeys as $key) {
-                                        switch ($key) {
-                                                case 'intl':
-                                                        $owner->setIntl($owner->getIntl()*$skill->getBoost()[$key]);
-                                                        echo "La INTL de ".$owner->getName()." ahora es: ".$owner->getIntl()."<br>";
-                                                        break;
-                                                case 'agi':
-                                                        $owner->setAgi($owner->getIntl() * $skill->getBoost()[$key]);
-                                                        echo "La AGI de ".$owner->getName()." ahora es: ".$owner->getAgi()."<br>";
-                                                        break;
-                                                case 'str':
-                                                        $owner->setStr($owner->getIntl() * $skill->getBoost()[$key]);
-                                                        echo "La STR de " . $owner->getName() . " ahora es: " . $owner->getAgi() . "<br>";
-                                                        break;
-                                                
-                                                default:
-                                                        # code...
-                                                        break;
-                                        }
+                if(in_array($skill, $characterSkills)) {
+                        foreach ($statsToAttack as $key => $value) {
+                                if(in_array($key, $statsSkill)) {
+                                        $finalDamage += $value*$skill->getDmg()[$key];
                                 }
                         }
-
                 } else {
-                        echo $owner->getName()."no tiene la skill que desea utilizar.<br>";
+                        echo $owner->getName()." no tiene la skill que desea utilizar.<br>";
+                        return 0;
+                }
+
+                if($finalDamage != 0) {
+                        //Cálculo del daño final y el incremento del daño crítico según el tipo de skill.
+                        $toAttack = self::boostPerType($finalDamage, $skill, $owner);
+
+                        $probability = mt_rand(1, 100);
+                        if ($probability <= $toAttack['criticalImpact'] * 100) {
+                                $finalDamage = $toAttack['finalDamage'] * 1.5;
+                                // echo "Probabilidad caída ".$probability. " - CriticalProbability: " . $toAttack['criticalImpact']."<br>";
+                                echo $owner->getName() . " ataca con daño crítico a: " . $victim->getName() . "<br>";
+                                self::takeDamage($finalDamage, $skill->getType(), $victim);
+                        } else {
+                                $finalDamage = $toAttack['finalDamage'];
+                                // echo "Probabilidad caída " . $probability . " - CriticalProbability: " . $toAttack['criticalImpact'] . "<br>";
+                                echo $owner->getName() . " ataca a: " . $victim->getName() . "<br>";
+                                self::takeDamage($finalDamage, $skill->getType(), $victim);
+                        }
                 }
                 echo "<br>";
         }
         
         public static function takeDamage(float $damage, string $type, Character $victim) {
-                if($type == 'fisico') {
+                if($type == 'Fisico') {
                         $finalDamage = $damage - ($damage*0.01)*($victim->getPDef()/10);
-                } else if ('magico') {
+                } else if ('Magico') {
                         $finalDamage = $damage - ($damage * 0.01) * ($victim->getMDef()/10);
                 }
 
@@ -110,7 +82,7 @@ class DamageManager{
                 $victim->setHealtPoints($victim->getHealtPoints()-$finalDamage);
                 echo $victim->getName()." ha perdido ".$finalDamage." HP.<br>";
                 echo $victim->getName()." ahora tiene ".$victim->getHealtPoints()." HP.<br>";
-                if($victim->getHealtPoints()<=0) {
+                if($victim->getHealtPoints()==0) {
                         self::die($victim);
                 }
         }
@@ -118,14 +90,14 @@ class DamageManager{
         private function boostPerType (float $finalDamage, Skill $skill, Character $character) {
                 $criticalImpact = 0.05;
                 
-                if($skill->getType() == 'fisico') {
+                if($skill->getType() == 'Fisico') {
 
                         $finalDamage = $finalDamage + ($finalDamage * 0.02)*($character->getStr()/10);
                         $criticalImpact = $criticalImpact + ($criticalImpact * 0.01)*($character->getAgi()/10);
 
                         return array('finalDamage' => $finalDamage, 'criticalImpact' => $criticalImpact);
 
-                } else if ($skill->getType() == 'magico') {
+                } else if ($skill->getType() == 'Magico') {
                         $finalDamage = $finalDamage + ($finalDamage * 0.02) * ($character->getIntl() / 10);
                         $criticalImpact = $criticalImpact + ($criticalImpact * 0.01) * ($character->getAgi() / 10);
 

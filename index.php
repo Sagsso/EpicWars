@@ -29,17 +29,17 @@ echo "<br>";
 
 $golpeConArma =  SkillManager::create('Golpe con Arma', 'Fisico', 'Basico', 'El personaje ataca inflingiendo 
 el 100% del daño de arma si esta es de mano derecha o dos manos, pero de ser de mano izquierda inflingirá 70%', 
-array(), array("dmgWR" => 1, "dmgWL"=>0.7));
+array(), array("rl" => 1,"r" => 1, "l"=>0.7));
 $golpeTrampero =  SkillManager::create('Golpe Trampero', 'Fisico', 'Picaro', 'El personaje distrae a su oponente 
 con un movimiento malintencionado asestando un golpe con arma que inflije 150% de daño con ambas armas', 
-array(), array("dmgWR"=>1.5, "dmgWL"=>1.5));
+array(), array("rl" => 1.5,"r"=>1.5, "l"=>1.5));
 $tajoMortal =  SkillManager::create('Tajo Mortal', 'Fisico', 'Guerrero', 'El personaje salta con intenciones 
 despiadadas y raja a su enemigo inflingiendo 200% de daño con armas.', array(),
-array("dmgWR" => 2, "dmgWL" => 2));
+array("rl" => 2,"r" => 2, "l" => 2));
 $meditacion =  SkillManager::create('Meditacion', 'Magico', 'Basico', 'El personaje medita un momento incrementando 
 su agilidad e intelecto en 5%.', array("agi" => 1.05, "intl" => 1.05), array());
 $calcinacion =  SkillManager::create('Calcinación', 'Magico', 'Mago', 'El personaje invoca el poder arcano y el elemento 
-del fuego para quemar a su enemigo inflingiendo 40% de su intelecto como daño mágico.', array(), array("dmgIntl" => 0.4));
+del fuego para quemar a su enemigo inflingiendo 40% de su intelecto como daño mágico.', array(), array("intl" => 0.4));
 
 echo "<br>";
 
@@ -93,6 +93,10 @@ echo "<br>";
 SkillManager::learnSkill($golpeTrampero, $orc);
 SkillManager::learnSkill($golpeConArma, $orc);
 SkillManager::learnSkill($golpeConArma, $human);
+SkillManager::learnSkill($tajoMortal, $orc);
+SkillManager::learnSkill($tajoMortal, $human);
+SkillManager::learnSkill($tajoMortal, $dwarf);
+SkillManager::learnSkill($golpeConArma, $dwarf);
 SkillManager::learnSkill($calcinacion, $human);
 SkillManager::learnSkill($meditacion, $human);
 
@@ -108,13 +112,21 @@ WeaponManager::assignWeapon($baston, $orc);
 WeaponManager::assignWeapon($baston, $human);
 WeaponManager::assignWeapon($daga1, $orc);
 WeaponManager::assignWeapon($daga2, $orc);
+WeaponManager::assignWeapon($hacha, $dwarf);
 
 //Validamos que solo se pueden asignar armas dependiendo de la clase
 
 WeaponManager::assignWeapon($hacha, $orc);
 
+//Ataques
 DamageManager::attack($orc, $golpeConArma, $human);
-DamageManager::attack($orc, $golpeTrampero, $human);
 DamageManager::attack($human, $golpeConArma, $orc);
-DamageManager::attack($human, $calcinacion, $orc);
-DamageManager::attack($human, $meditacion, $orc);
+DamageManager::attack($human, $tajoMortal, $orc);
+DamageManager::attack($orc, $tajoMortal, $human);
+DamageManager::attack($dwarf, $tajoMortal, $human);
+DamageManager::attack($dwarf, $golpeConArma, $human);
+
+//Buffos
+DamageManager::buff($human, $meditacion);
+DamageManager::buff($human, $meditacion);
+

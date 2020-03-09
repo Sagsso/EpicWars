@@ -61,7 +61,7 @@ class SkillManager {
             $character->addSkills($skill);
             echo "El personaje " . $character->getName() . " aprendió la skill " . $skill->getName() . " <br>";
         } else {
-            echo "El personaje " . $character->getName() . " NO puede aprender la skill " . $skill->getName() . " porque es de clase " . $character->getclase() . " <br>";
+            echo "El personaje " . $character->getName() . " NO puede aprender la skill " . $skill->getName() . " porque es de clase " . $character->getClase()::getClaseName() . " <br>";
         }
     }
 

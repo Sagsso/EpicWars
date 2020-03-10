@@ -251,7 +251,6 @@ class Character {
      */ 
     public function setXp($xp){
         $this->xp = $xp;
-
         return $this;
     }
 

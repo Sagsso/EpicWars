@@ -59,31 +59,35 @@ class DamageManager{
                                 $finalDamage = $toAttack['finalDamage'] * 1.5;
                                 // echo "Probabilidad caída ".$probability. " - CriticalProbability: " . $toAttack['criticalImpact']."<br>";
                                 echo $owner->getName() . " ataca con daño crítico a: " . $victim->getName() . "<br>";
-                                self::takeDamage($finalDamage, $skill->getType(), $victim);
+                                self::takeDamage($finalDamage, $skill->getType(), $victim, $owner);
                         } else {
                                 $finalDamage = $toAttack['finalDamage'];
                                 // echo "Probabilidad caída " . $probability . " - CriticalProbability: " . $toAttack['criticalImpact'] . "<br>";
                                 echo $owner->getName() . " ataca a: " . $victim->getName() . "<br>";
-                                self::takeDamage($finalDamage, $skill->getType(), $victim);
+                                self::takeDamage($finalDamage, $skill->getType(), $victim, $owner);
                         }
                 }
                 echo "<br>";
         }
         
-        public static function takeDamage(float $damage, string $type, Character $victim) {
+        public static function takeDamage(float $damage, string $type, Character $victim, Character $owner) {
+                //$damage es el daño total sin defensa aplicada
                 if($type == 'Fisico') {
                         $finalDamage = $damage - ($damage*0.01)*($victim->getPDef()/10);
                 } else if ('Magico') {
                         $finalDamage = $damage - ($damage * 0.01) * ($victim->getMDef()/10);
                 }
-
+                
+                //Daño total con defensa aplicada
                 $finalDamage = round($finalDamage,1, PHP_ROUND_HALF_UP);
+
 
                 $victim->setHealtPoints($victim->getHealtPoints()-$finalDamage);
                 echo $victim->getName()." ha perdido ".$finalDamage." HP.<br>";
                 echo $victim->getName()." ahora tiene ".$victim->getHealtPoints()." HP.<br>";
                 if($victim->getHealtPoints()==0) {
                         self::die($victim);
+                        LevelManager::addExp($owner);
                 }
         }
 

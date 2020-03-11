@@ -80,53 +80,57 @@ echo "<br>";
 
 //Creamos los personajes
 
-$human = CharacterManager::create("Gerald",0,1,Human::class,Mage::getInstance());
-$orc = CharacterManager::create("Garrosh",1,0,Orc::class,Rogue::getInstance());
+$gerald = CharacterManager::create("Gerald",0,1,Human::class,Mage::getInstance());
+$garrosh = CharacterManager::create("Garrosh",1,0,Orc::class,Rogue::getInstance());
 $orc2 = CharacterManager::create("Thrum",1,0,Orc::class,Warrior::getInstance());
-$dwarf = CharacterManager::create("Tyrion",2,2,Dwarf::class,Warrior::getInstance());
-$elf = CharacterManager::create("Dobby",1,1,Elf::class,Rogue::getInstance());
+$tyrion = CharacterManager::create("Tyrion",2,2,Dwarf::class,Warrior::getInstance());
+$dobby = CharacterManager::create("Dobby",1,1,Elf::class,Rogue::getInstance());
 
 echo "<br>";
 
 //Asignamos skills para los personajes
 
-SkillManager::learnSkill($golpeTrampero, $orc);
-SkillManager::learnSkill($golpeConArma, $orc);
-SkillManager::learnSkill($golpeConArma, $human);
-SkillManager::learnSkill($tajoMortal, $orc);
-SkillManager::learnSkill($tajoMortal, $human);
-SkillManager::learnSkill($tajoMortal, $dwarf);
-SkillManager::learnSkill($golpeConArma, $dwarf);
-SkillManager::learnSkill($calcinacion, $human);
-SkillManager::learnSkill($meditacion, $human);
+SkillManager::learnSkill($golpeTrampero, $garrosh);
+SkillManager::learnSkill($golpeConArma, $garrosh);
+SkillManager::learnSkill($golpeConArma, $gerald);
+SkillManager::learnSkill($tajoMortal, $garrosh);
+SkillManager::learnSkill($tajoMortal, $gerald);
+SkillManager::learnSkill($tajoMortal, $tyrion);
+SkillManager::learnSkill($golpeConArma, $tyrion);
+SkillManager::learnSkill($calcinacion, $gerald);
+SkillManager::learnSkill($meditacion, $gerald);
 
 echo "<br>";
 
 //Validamos que se puedan olvidar sólo si ya conocen la skill
 
-SkillManager::forgetSkill($tacticasCombate, $human);
+SkillManager::forgetSkill($tacticasCombate, $gerald);
 
 //Asignamos armas a los personajes
 
-WeaponManager::assignWeapon($baston, $orc);
-WeaponManager::assignWeapon($baston, $human);
-WeaponManager::assignWeapon($daga1, $orc);
-WeaponManager::assignWeapon($daga2, $orc);
-WeaponManager::assignWeapon($hacha, $dwarf);
+WeaponManager::assignWeapon($baston, $garrosh);
+WeaponManager::assignWeapon($baston, $gerald);
+WeaponManager::assignWeapon($daga1, $garrosh);
+WeaponManager::assignWeapon($daga2, $garrosh);
+WeaponManager::assignWeapon($hacha, $tyrion);
 
 //Validamos que solo se pueden asignar armas dependiendo de la clase
 
-WeaponManager::assignWeapon($hacha, $orc);
+WeaponManager::assignWeapon($hacha, $garrosh);
 
 //Ataques
-DamageManager::attack($orc, $golpeConArma, $human);
-DamageManager::attack($human, $golpeConArma, $orc);
-DamageManager::attack($human, $tajoMortal, $orc);
-DamageManager::attack($orc, $tajoMortal, $human);
-DamageManager::attack($dwarf, $tajoMortal, $human);
-DamageManager::attack($dwarf, $golpeConArma, $human);
+DamageManager::attack($garrosh, $golpeConArma, $gerald);
+DamageManager::attack($gerald, $golpeConArma, $garrosh);
+DamageManager::attack($gerald, $tajoMortal, $garrosh);
+DamageManager::attack($garrosh, $tajoMortal, $gerald);
+DamageManager::attack($tyrion, $tajoMortal, $gerald);
+DamageManager::attack($tyrion, $golpeConArma, $gerald);
+DamageManager::attack($tyrion, $tajoMortal, $garrosh);
 
 //Buffos
-DamageManager::buff($human, $meditacion);
-DamageManager::buff($human, $meditacion);
+DamageManager::buff($gerald, $meditacion);
+DamageManager::buff($gerald, $meditacion);
+
+DamageManager::attack($tyrion, $golpeConArma, $garrosh);
+
 

@@ -34,6 +34,7 @@ class DamageManager{
         public static function attack(Character $owner,Skill $skill, Character $victim) {
                 
                 $finalDamage = 0;
+                //statsToAttack Trae los stats útiles para atacar o daño las armas si tiene.
                 $statsToAttack = CharacterManager::getStatsToAttack($owner);
                 $statsSkill = array_keys($skill->getDmg());
                 //añadimos los daños de Weapons al $statsToAttack
